@@ -2,22 +2,28 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>내 사이트</title>
-  <style>
-    body {
-      background: #111827;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
-    }
-    h1 { font-size: 40px; }
-    p { color: #cbd5e1; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome.</title>
 </head>
 <body>
-  <h1>내 사이트에 오신 것을 환영합니다!</h1>
-  <p>사이트 제작 성공!</p>
+  <h1>사이트에 오신 것을 환영합니다!</h1>
+
+  <script>
+    const WORKER_URL = "https://YOUR_WORKER_URL";
+
+    fetch(WORKER_URL + "/log", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        event: "page_view",
+        page: window.location.pathname,
+        time: new Date().toISOString()
+      })
+    }).catch(error => {
+      console.error("로그 전송 실패:", error);
+    });
+  </script>
 </body>
 </html>
